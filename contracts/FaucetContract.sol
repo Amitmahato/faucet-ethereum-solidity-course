@@ -37,7 +37,15 @@ contract Faucet {
 
   function getFunderAtIndex(uint index) public view returns ( address funder) {
     funder = funders[index];
-  //  return funders[index];
+  }
+
+  function getAllFunders() public view returns(address[] memory) {
+    address[] memory _funders = new address[](numberOfFunders);
+    for (uint index = 0; index < numberOfFunders; index++) {
+      _funders[index] = funders[index];
+    }
+
+    return _funders;
   }
 
   /**
@@ -80,4 +88,7 @@ contract Faucet {
      => await instance.getFunderAtIndex(0);
      => await instance.getFunderAtIndex(1);
      => await instance.getFunderAtIndex(2);
+
+     5. get a list of funders
+     => await instance.getAllFunders();
  */
