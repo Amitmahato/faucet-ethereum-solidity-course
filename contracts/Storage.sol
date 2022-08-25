@@ -32,6 +32,46 @@ contract Storage {
   uint8 public i = 40; // 1 byte -> slot 2, 3 or 4 ? -> takes the slot 4, which means slot 2 still has unused space
 
   /**
+      Location of mapping in the storage is calculated in a different way
+      The location is calculated by finding the keccak256 encoding of the
+      combination of the key and the slot
+      i.e. location = keccak256(key . slot)
+      ex: if key = 1 and slot = 5:
+      32 bytes of key (64 characters) + 32 bytes of slot (64 characters) encoded by keccak256
+      location = keccak256(00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000005)
+   */
+  mapping(uint => uint) aa; // slot 5
+  mapping(address => uint) ab; // slot 6
+  
+  constructor(){
+    aa[4] = 40;
+    aa[7] = 70;
+
+    ab[0x7a02f64Cfe9a38a4ecFe4A91601aB789c1bFeb94] = 100;
+  }
+
+  /**
+    1. aa[4]
+      location for aa[4] = keccak256(0x00000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000005)
+                        = 0x3eec716f11ba9e820c81ca75eb978ffb45831ef8b7a53e5e422c26008e1ca6d5
+      `web3.eth.getStorageAt("0x2890b9494a202F2D537Beb65E6100a8899E165a1", "0x3eec716f11ba9e820c81ca75eb978ffb45831ef8b7a53e5e422c26008e1ca6d5")`
+      Output => '0x28' -> 40 in decimal
+    
+    2. aa[7]
+      location for aa[4] = keccak256(0x00000000000000000000000000000000000000000000000000000000000000070000000000000000000000000000000000000000000000000000000000000005)
+                        = 0xeddb6698d7c569ff62ff64f1f1492bf14a54594835ba0faac91f84b4f5d81460
+      `web3.eth.getStorageAt("0x2890b9494a202F2D537Beb65E6100a8899E165a1", "0xeddb6698d7c569ff62ff64f1f1492bf14a54594835ba0faac91f84b4f5d81460")`
+      Output => '0x46' -> 70 in decimal
+    
+    3. ab[0x7a02f64Cfe9a38a4ecFe4A91601aB789c1bFeb94]
+      location for aa[4] = keccak256(0x0000000000000000000000007a02f64Cfe9a38a4ecFe4A91601aB789c1bFeb940000000000000000000000000000000000000000000000000000000000000006)
+                        = 0x84d93e274c0e77176bc83245f84088aba339fe46f5e1cb36896b98c667cd33a1
+      `web3.eth.getStorageAt("0x2890b9494a202F2D537Beb65E6100a8899E165a1", "0x84d93e274c0e77176bc83245f84088aba339fe46f5e1cb36896b98c667cd33a1")`
+      Output => '0x64' -> 100 in decimal
+  */
+
+
+  /**
     After deploying the contract to the Ganache Network and getting the storage from contract address at slot 0
   
     truffle(development)> const instance = await Storage.deployed()
