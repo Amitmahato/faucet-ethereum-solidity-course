@@ -16,7 +16,7 @@ contract Faucet {
     // React to receiving ether
   }
 
-  function addFunds() external {}
+  function addFunds() external payable{}
 }
 
 // Block info
