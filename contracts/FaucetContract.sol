@@ -3,6 +3,11 @@ pragma solidity >=0.4.22 <0.9.0;
 
 contract Faucet {
   
+  // `public` - can be accessible throw the getter method outside the smart contract
+  // `private` - can be accessible only within the smart contract
+  // `internal` - can be accessible within the smart contract and also the derived smart contracts
+  address[] public funders;
+
   /**
     - this is a special function
     - it's called when you make a tx that doesn't specify function name to call
