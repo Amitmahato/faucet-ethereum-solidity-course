@@ -42,8 +42,44 @@ contract Storage {
    */
   mapping(uint => uint) aa; // slot 5
   mapping(address => uint) ab; // slot 6
+
+  /**
+      Location of dynamic array in the storage is calculated in following way:
+      
+      `location = hexadecimal( decimal(keccak256(32 bytes representation of slot)) + index of element in decimal)`
+
+      or
+
+      `location = keccak256(32 bytes representation of slot)) + hexadecimal( index of element in decimal )`
+
+      Ex: here the slot is 7, i.e. 0x0000000000000000000000000000000000000000000000000000000000000007
+      => keccak256("0x0000000000000000000000000000000000000000000000000000000000000007") 
+      => ee2a4bc7db81da2b7164e56b3649b1e2a09c58c455b15dabddd9146c7582cebc
+
+      So, the location of the items at corresponding index will be:
+      index | location in storage
+      0   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x0
+            = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688
+
+      1   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x1
+            = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c689
+          
+      2   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x2
+            = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c68a
+          
+      3   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x3
+            = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c68b
+          
+      4   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x4
+            = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c68c
+  */
+  uint[] public ac; // slot 7
   
   constructor(){
+    ac.push(1); // index 0
+    ac.push(10); // index 1
+    ac.push(100); // index 2
+
     aa[4] = 40;
     aa[7] = 70;
 
