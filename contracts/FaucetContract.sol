@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-contract Faucet {
+import "./Owned.sol";
+
+contract Faucet is Owned{
   
   // `public` - can be accessible throw the getter method outside the smart contract
   // `private` - can be accessible only within the smart contract
@@ -14,11 +16,6 @@ contract Faucet {
   }
   mapping(address => FunderInfo) private funders;
   mapping(uint => address) private lookUpFunders;
-  address private owner;
-
-  constructor(){
-    owner = msg.sender;
-  }
 
   /**
       The modifier can be place at the definition of any method of the contract,
@@ -33,14 +30,6 @@ contract Faucet {
   }
 
   /**
-      `onlyOwner` modifier can be applied to methods that should be accessed ony by the contract creator
-   */
-  modifier onlyOwner(){
-    require(owner == msg.sender, "Only the owner can access this method");
-    _;
-  }
-
-  /**
     - this is a special function
     - it's called when you make a tx that doesn't specify function name to call
     - It executes on calls to the contract with no data (calldata), e.g. calls made via send() or transfer().
@@ -51,10 +40,6 @@ contract Faucet {
 
   receive() external payable {
     // React to receiving ether
-  }
-
-  function transferOwnership(address newOwner) external onlyOwner {
-    owner = newOwner;
   }
 
   function addFunds() external payable{
@@ -83,9 +68,6 @@ contract Faucet {
     return fund;
   }
 
-  function getCurrentOwner() external view onlyOwner returns(address){
-    return owner;
-  }
 
   function withdraw(uint withdrawAmount) public limitWithdrawal(withdrawAmount) {
     payable(msg.sender).transfer(withdrawAmount);
