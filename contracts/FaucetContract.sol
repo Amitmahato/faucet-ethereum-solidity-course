@@ -14,6 +14,11 @@ contract Faucet {
   }
   mapping(address => FunderInfo) private funders;
   mapping(uint => address) private lookUpFunders;
+  address private owner;
+
+  constructor(){
+    owner = msg.sender;
+  }
 
   /**
       The modifier can be place at the definition of any method of the contract,
@@ -28,6 +33,14 @@ contract Faucet {
   }
 
   /**
+      `onlyOwner` modifier can be applied to methods that should be accessed ony by the contract creator
+   */
+  modifier onlyOwner(){
+    require(owner == msg.sender, "Only the owner can access this method");
+    _;
+  }
+
+  /**
     - this is a special function
     - it's called when you make a tx that doesn't specify function name to call
     - It executes on calls to the contract with no data (calldata), e.g. calls made via send() or transfer().
@@ -38,6 +51,10 @@ contract Faucet {
 
   receive() external payable {
     // React to receiving ether
+  }
+
+  function transferOwnership(address newOwner) external onlyOwner {
+    owner = newOwner;
   }
 
   function addFunds() external payable{
@@ -62,8 +79,12 @@ contract Faucet {
     }
   }
 
-  function getAvailableFund() public view returns(uint) {
+  function getAvailableFund() public view onlyOwner returns(uint) {
     return fund;
+  }
+
+  function getCurrentOwner() external view onlyOwner returns(address){
+    return owner;
   }
 
   function withdraw(uint withdrawAmount) public limitWithdrawal(withdrawAmount) {
@@ -137,4 +158,18 @@ contract Faucet {
 
      // try to withdraw 1.5 ETH, although the transaction is successfull, the transfer of ether isn't actually made
      => await instance.withdraw("1500000000000000000", { from: accounts[0] });
+
+     7. Access onlyOwner methods
+     => await instance.getCurrentOwner();
+     => await instance.transferOwnership(accounts[1]);
+     
+     // Will fail with error `Only the owner can access this method`, 
+     //  since by default the from field is populated with accounts[0] but this account is not the owner
+     => await instance.getCurrentOwner();
+     
+     // Will fail with error `Only the owner can access this method`, 
+     //  since by default the from field is populated with accounts[0] but this account is not the owner
+     => await instance.transferOwnership(accounts[0]);
+
+     => await instance.getCurrentOwner({ from: accounts[1] }); // will be executed successfully
  */
