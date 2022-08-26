@@ -55,10 +55,10 @@ contract Faucet {
   }
 
   function withdraw(uint withdrawAmount) public {
-    if(withdrawAmount <= 1000000000000000000 && withdrawAmount <= fund){
-      payable(msg.sender).transfer(withdrawAmount);
-      fund -= withdrawAmount;
-    }
+    require(withdrawAmount <= 100000000000000000, "Withdraw amount cannot be greater than 0.1 ether");
+    require(withdrawAmount <= fund, "Insufficient fund for the requested withdrawal amount");
+    payable(msg.sender).transfer(withdrawAmount);
+    fund -= withdrawAmount;
   }
 
   function getFunderAtIndex(uint index) public view returns ( FunderInfo memory funder) {
