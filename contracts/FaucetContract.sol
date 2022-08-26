@@ -16,6 +16,18 @@ contract Faucet {
   mapping(uint => address) private lookUpFunders;
 
   /**
+      The modifier can be place at the definition of any method of the contract,
+      and is something like a middleware, 
+      this `limitWithdrawal` modifier can be reused as a modifier
+      the `_` here will call the function body if the required conditions are passed
+   */
+  modifier limitWithdrawal(uint withdrawAmount){
+    require(withdrawAmount <= 100000000000000000, "Withdraw amount cannot be greater than 0.1 ether");
+    require(withdrawAmount <= fund, "Insufficient fund for the requested withdrawal amount");
+    _;
+  }
+
+  /**
     - this is a special function
     - it's called when you make a tx that doesn't specify function name to call
     - It executes on calls to the contract with no data (calldata), e.g. calls made via send() or transfer().
@@ -54,9 +66,7 @@ contract Faucet {
     return fund;
   }
 
-  function withdraw(uint withdrawAmount) public {
-    require(withdrawAmount <= 100000000000000000, "Withdraw amount cannot be greater than 0.1 ether");
-    require(withdrawAmount <= fund, "Insufficient fund for the requested withdrawal amount");
+  function withdraw(uint withdrawAmount) public limitWithdrawal(withdrawAmount) {
     payable(msg.sender).transfer(withdrawAmount);
     fund -= withdrawAmount;
   }
