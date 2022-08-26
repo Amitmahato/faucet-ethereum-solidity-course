@@ -54,6 +54,13 @@ contract Faucet {
     return fund;
   }
 
+  function withdraw(uint withdrawAmount) public {
+    if(withdrawAmount <= 1000000000000000000 && withdrawAmount <= fund){
+      payable(msg.sender).transfer(withdrawAmount);
+      fund -= withdrawAmount;
+    }
+  }
+
   function getFunderAtIndex(uint index) public view returns ( FunderInfo memory funder) {
     funder = funders[lookUpFunders[index]];
   }
@@ -113,4 +120,11 @@ contract Faucet {
 
      5. get a list of funders
      => await instance.getAllFunders();
+
+     6. withdraw funds upto 1 ETH
+     // withdraw 0.5 ETH 
+     => await instance.withdraw("500000000000000000", { from: accounts[0] });
+
+     // try to withdraw 1.5 ETH, although the transaction is successfull, the transfer of ether isn't actually made
+     => await instance.withdraw("1500000000000000000", { from: accounts[0] });
  */
