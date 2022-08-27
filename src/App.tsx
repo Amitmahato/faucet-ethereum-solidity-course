@@ -3,11 +3,15 @@ import "./App.css";
 // @ts-ignore
 import web3 from "web3/dist/web3.min.js";
 
-declare var window: any;
+/**
+ * The issue of `Failed to parse source map ...` related to @metamask/detect-provider
+ * will need an update, as mentioned in issue `https://github.com/MetaMask/detect-provider/issues/42#issuecomment-1215848244`
+ */
+import detectEthereumProvider from "@metamask/detect-provider";
 
 function App() {
   const [web3Api, setWeb3Api] = useState<{
-    provider: null;
+    provider: any;
     web3: web3 | null;
   }>({
     provider: null,
@@ -24,28 +28,20 @@ function App() {
      * sign  messages and transactions
      */
     const loadProvider = async () => {
-      let provider = null;
-      if (window.ethereum) {
-        provider = window.ethereum;
-        try {
-          await provider.request({
-            method: "eth_requestAccounts",
-          });
-        } catch (e) {
-          console.error("User denied access to metamask accounts: ", e);
-        }
-      } else if (window.web3) {
-        // legacy version of metamask used `window.web3`
-        provider = window.web3.currentProvider;
-      } else if (!process.env.production) {
-        // If not in production mode, use Ganache network provider
-        provider = new web3.providers.HttpProvider("localhost:7545");
-      }
+      let provider: any = await detectEthereumProvider();
 
-      setWeb3Api({
-        provider,
-        web3: new web3(provider),
-      });
+      if (provider) {
+        await provider.request({
+          method: "eth_requestAccounts",
+        });
+
+        setWeb3Api({
+          provider,
+          web3: new web3(provider),
+        });
+      } else {
+        console.error("Please, Install Metamask");
+      }
     };
 
     loadProvider();
