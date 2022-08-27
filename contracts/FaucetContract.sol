@@ -2,8 +2,9 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "./Owned.sol";
+import "./Logger.sol";
 
-contract Faucet is Owned{
+contract Faucet is Owned, Logger {
   
   // `public` - can be accessible throw the getter method outside the smart contract
   // `private` - can be accessible only within the smart contract
@@ -40,6 +41,10 @@ contract Faucet is Owned{
 
   receive() external payable {
     // React to receiving ether
+  }
+
+  function emitLogs() public override pure returns(bytes32){
+    return "Hello Web3, from Faucet";
   }
 
   function addFunds() external payable{
@@ -154,4 +159,8 @@ contract Faucet is Owned{
      => await instance.transferOwnership(accounts[0]);
 
      => await instance.getCurrentOwner({ from: accounts[1] }); // will be executed successfully
+
+     8. Overriden emitLogs() method fromt the abstract Logger contract
+     => await instance.emitLogs();
+     => await instance.testFunc();
  */
