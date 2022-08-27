@@ -1,9 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+// @ts-ignore
+import web3 from "web3/dist/web3.min.js";
 
 declare var window: any;
 
 function App() {
+  const [web3Api, setWeb3Api] = useState<{
+    provider: null;
+    web3: web3 | null;
+  }>({
+    provider: null,
+    web3: null,
+  });
+
   useEffect(() => {
     /**
      * Metamask injects a global API into the website
@@ -12,25 +22,34 @@ function App() {
      * sign  messages and transactions
      */
     const loadProvider = async () => {
-      console.log("Ethereum API: ", window.ethereum);
-      console.log("Web3 API: ", window.web3);
+      let provider = null;
+      if (window.ethereum) {
+        provider = window.ethereum;
+        try {
+          // This method of enabling the access to metamask is deprecated
+          // We will change this later
+          await provider.enable();
+        } catch (e) {
+          console.error("User denied access to metamask accounts: ", e);
+        }
+      } else if (window.web3) {
+        // legacy version of metamask used `window.web3`
+        provider = window.web3.currentProvider;
+      } else if (!process.env.production) {
+        // If not in production mode, use Ganache network provider
+        provider = new web3.providers.HttpProvider("localhost:7545");
+      }
+
+      setWeb3Api({
+        provider,
+        web3: new web3(provider),
+      });
     };
 
     loadProvider();
   }, []);
 
-  const enableEthereum = async () => {
-    if (window.ethereum) {
-      /**
-       * This will connect to the metamask and use one of the connected account
-       * Upon changing the connected account from the metamask window, same will be reflected in the website
-       */
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
-      console.log("Accounts: ", accounts);
-    }
-  };
+  console.log(web3Api.web3);
 
   return (
     <>
@@ -39,9 +58,6 @@ function App() {
           <div className="balance-view is-size-2">
             Current Balance: <strong>{124}</strong> ETH
           </div>
-          <button className="btn mr-2" onClick={enableEthereum}>
-            Enable Ethereum
-          </button>
           <button className="btn mr-2">Donate</button>
           <button className="btn mr-2">Withdraw</button>
         </div>
