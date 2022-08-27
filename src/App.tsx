@@ -28,9 +28,9 @@ function App() {
       if (window.ethereum) {
         provider = window.ethereum;
         try {
-          // This method of enabling the access to metamask is deprecated
-          // We will change this later
-          await provider.enable();
+          await provider.request({
+            method: "eth_requestAccounts",
+          });
         } catch (e) {
           console.error("User denied access to metamask accounts: ", e);
         }
