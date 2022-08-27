@@ -31,10 +31,6 @@ function App() {
       let provider: any = await detectEthereumProvider();
 
       if (provider) {
-        await provider.request({
-          method: "eth_requestAccounts",
-        });
-
         setWeb3Api({
           provider,
           web3: new web3(provider),
@@ -60,19 +56,35 @@ function App() {
     }
   }, [web3Api.web3]);
 
+  const connectWallet = async () => {
+    if (web3Api.provider) {
+      await web3Api.provider.request({
+        method: "eth_requestAccounts",
+      });
+    }
+  };
+
   return (
     <>
       <div className="faucet-wrapper">
         <div className="faucet">
           <span>
-            <strong>Account</strong>
+            <strong>Account: </strong>
           </span>
-          <h1>{account ? account : "not connected"}</h1>
-          <div className="balance-view is-size-2">
+          <span>
+            {account ? (
+              account
+            ) : (
+              <button className="button is-small" onClick={connectWallet}>
+                Connect Wallet
+              </button>
+            )}
+          </span>
+          <div className="balance-view is-size-2 mb-4">
             Current Balance: <strong>{124}</strong> ETH
           </div>
-          <button className="btn mr-2">Donate</button>
-          <button className="btn mr-2">Withdraw</button>
+          <button className="button is-link mr-2">Donate</button>
+          <button className="button is-primary mr-2">Withdraw</button>
         </div>
       </div>
     </>
