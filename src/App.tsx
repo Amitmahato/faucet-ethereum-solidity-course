@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 // @ts-ignore
 import web3 from "web3";
@@ -81,6 +81,14 @@ function App() {
     }
   }, [web3Api]);
 
+  const donateFund = useCallback(async () => {
+    const { contract, web3 } = web3Api;
+    await contract.addFunds({
+      from: account,
+      value: web3?.utils.toWei("1", "ether"),
+    });
+  }, [web3Api, account]);
+
   return (
     <>
       <div className="faucet-wrapper">
@@ -100,7 +108,9 @@ function App() {
           <div className="balance-view is-size-2 mb-4">
             Current Balance: <strong>{balance}</strong> ETH
           </div>
-          <button className="button is-link mr-2">Donate</button>
+          <button className="button is-link mr-2" onClick={donateFund}>
+            Donate 1 ETH
+          </button>
           <button className="button is-primary mr-2">Withdraw</button>
         </div>
       </div>
