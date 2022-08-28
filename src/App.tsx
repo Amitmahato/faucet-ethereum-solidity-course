@@ -26,6 +26,12 @@ function App() {
 
   const refresh = () => setReload(!reload);
 
+  const accountListener = (provider: any) => {
+    provider.on("accountsChanged", (_account: string) => {
+      setAccount(_account[0]);
+    });
+  };
+
   useEffect(() => {
     /**
      * Metamask injects a global API into the website
@@ -35,6 +41,7 @@ function App() {
      */
     const loadProvider = async () => {
       let provider: any = await detectEthereumProvider();
+      accountListener(provider);
       const contract = await loadContract("Faucet", provider);
       if (provider) {
         setWeb3Api({
