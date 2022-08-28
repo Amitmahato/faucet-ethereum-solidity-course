@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 // @ts-ignore
 import web3 from "web3";
@@ -22,6 +22,9 @@ function App() {
 
   const [account, setAccount] = useState<string | null>(null);
   const [balance, setBalance] = useState(0);
+  const [reload, setReload] = useState(false);
+
+  const refresh = () => setReload(!reload);
 
   useEffect(() => {
     /**
@@ -51,20 +54,20 @@ function App() {
     const getAccount = async () => {
       // will return a list of accounts, but only connected one at 0th index
       const accounts = (await web3Api.web3?.eth.getAccounts()) || [];
-
       setAccount(accounts[0]);
     };
 
     if (web3Api.web3) {
       getAccount();
     }
-  }, [web3Api.web3]);
+  }, [web3Api.web3, reload]);
 
   const connectWallet = async () => {
     if (web3Api.provider) {
       await web3Api.provider.request({
         method: "eth_requestAccounts",
       });
+      refresh();
     }
   };
 
@@ -79,15 +82,16 @@ function App() {
     if (web3Api.contract) {
       loadBalance();
     }
-  }, [web3Api]);
+  }, [web3Api, reload]);
 
-  const donateFund = useCallback(async () => {
+  const donateFund = async () => {
     const { contract, web3 } = web3Api;
     await contract.addFunds({
       from: account,
       value: web3?.utils.toWei("1", "ether"),
     });
-  }, [web3Api, account]);
+    refresh();
+  };
 
   return (
     <>
