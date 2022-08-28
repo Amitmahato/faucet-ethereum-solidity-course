@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 // @ts-ignore
-import web3 from "web3/dist/web3.min.js";
-
+import web3 from "web3";
 /**
  * The issue of `Failed to parse source map ...` related to @metamask/detect-provider
  * will need an update, as mentioned in issue `https://github.com/MetaMask/detect-provider/issues/42#issuecomment-1215848244`
  */
 import detectEthereumProvider from "@metamask/detect-provider";
+import { loadContract } from "./utils/loadContract";
 
 function App() {
   const [web3Api, setWeb3Api] = useState<{
     provider: any;
     web3: web3 | null;
+    contract: any;
   }>({
     provider: null,
     web3: null,
+    contract: null,
   });
 
-  const [account, setAccount] = useState(null);
+  const [account, setAccount] = useState<string | null>(null);
 
   useEffect(() => {
     /**
@@ -29,11 +31,12 @@ function App() {
      */
     const loadProvider = async () => {
       let provider: any = await detectEthereumProvider();
-
+      const contract = await loadContract("Faucet");
       if (provider) {
         setWeb3Api({
           provider,
           web3: new web3(provider),
+          contract,
         });
       } else {
         console.error("Please, Install Metamask");
@@ -46,7 +49,7 @@ function App() {
   useEffect(() => {
     const getAccount = async () => {
       // will return a list of accounts, but only connected one at 0th index
-      const accounts = await web3Api.web3.eth.getAccounts();
+      const accounts = (await web3Api.web3?.eth.getAccounts()) || [];
 
       setAccount(accounts[0]);
     };
