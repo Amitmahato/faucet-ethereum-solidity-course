@@ -21,6 +21,7 @@ function App() {
   });
 
   const [account, setAccount] = useState<string | null>(null);
+  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     /**
@@ -67,6 +68,19 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const loadBalance = async () => {
+      const { contract, web3 } = web3Api;
+      const _balance = await web3?.eth.getBalance(contract.address);
+      const ether = web3Api.web3?.utils.fromWei(_balance || "", "ether");
+      setBalance(Number(ether));
+    };
+
+    if (web3Api.contract) {
+      loadBalance();
+    }
+  }, [web3Api]);
+
   return (
     <>
       <div className="faucet-wrapper">
@@ -84,7 +98,7 @@ function App() {
             )}
           </span>
           <div className="balance-view is-size-2 mb-4">
-            Current Balance: <strong>{124}</strong> ETH
+            Current Balance: <strong>{balance}</strong> ETH
           </div>
           <button className="button is-link mr-2">Donate</button>
           <button className="button is-primary mr-2">Withdraw</button>
