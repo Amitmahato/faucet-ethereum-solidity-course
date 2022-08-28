@@ -17,7 +17,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -36,7 +37,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -49,7 +51,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -62,7 +65,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -75,7 +79,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -88,7 +93,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -101,7 +107,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -114,7 +121,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -127,7 +135,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -140,7 +149,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"a\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ac\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"b\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"c\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"e\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"f\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"g\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"h\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"i\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"j\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"ac(uint256)\":{\"notice\":\"Location of dynamic array in the storage is calculated in following way: `location = hexadecimal( decimal(keccak256(32 bytes representation of slot)) + index of element in decimal)` or `location = keccak256(32 bytes representation of slot)) + hexadecimal( index of element in decimal )` Ex: here the slot is 7, i.e. 0x0000000000000000000000000000000000000000000000000000000000000007 => keccak256(\\\"0x0000000000000000000000000000000000000000000000000000000000000007\\\")  => ee2a4bc7db81da2b7164e56b3649b1e2a09c58c455b15dabddd9146c7582cebc So, the location of the items at corresponding index will be: index | location in storage 0   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x0 = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 1   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x1 = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c689 2   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x2 = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c68a 3   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x3 = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c68b 4   ->  a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c688 + 0x4 = a66cc928b5edb82af9bd49922954155ab7b0942694bea4ce44661d9a8736c68c\"}},\"notice\":\"address -> 20 bytes uint256 -> 32 bytes uint128 -> 16 bytes uint64  ->  8 bytes uint32  ->  4 bytes uint16  ->  2 bytes uint8   ->  1 byte bool    ->  1 byte*\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Storage.sol\":\"Storage\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Storage.sol\":{\"keccak256\":\"0xa543bcaf92024e9240db010a70325abba2ff5e63d1fa41c5c7893c96dce28672\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0e02aa96a506b040ea9b5d6e956ef29287bd724a6305f518245a2c632fdc5253\",\"dweb:/ipfs/Qmd65HsumzYP2MWT6cuDqnpWGaPbUrEqKHNKAkCmVoVcX6\"]}},\"version\":1}",
@@ -4062,9 +4072,17 @@
     "name": "solc",
     "version": "0.8.11+commit.d7f03943.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x0567F82058B386f1f8CF72cf1fcad639B2c22575",
+      "transactionHash": "0x357d3fcf0889f8cb1d17310259ac44fc4a9710eb26061466f34085fb3dca554b"
+    }
+  },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-08-28T05:35:47.718Z",
+  "updatedAt": "2022-08-28T13:24:15.348Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

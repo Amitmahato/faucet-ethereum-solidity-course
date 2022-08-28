@@ -12,7 +12,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -25,7 +26,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -38,7 +40,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -51,7 +54,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -68,7 +72,8 @@
     },
     {
       "stateMutability": "payable",
-      "type": "receive"
+      "type": "receive",
+      "payable": true
     },
     {
       "inputs": [],
@@ -81,14 +86,16 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
       "name": "addFunds",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [],
@@ -101,7 +108,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -145,7 +153,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -170,7 +179,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -183,7 +193,8 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"addFunds\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"emitLogs\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllFunders\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"numberOfDonations\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalDonations\",\"type\":\"uint256\"}],\"internalType\":\"struct Faucet.FunderInfo[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAvailableFund\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCurrentOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getFunderAtIndex\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"numberOfDonations\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalDonations\",\"type\":\"uint256\"}],\"internalType\":\"struct Faucet.FunderInfo\",\"name\":\"funder\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"justTesting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"numberOfFunders\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"testFunc\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"testNum\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"withdrawAmount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"justTesting()\":{\"notice\":\"modifiers: `pure` & `view` - no any gas fee incurs  view - indicates the given function will not change the storage state in any way pure - even more strict, it will not even allow reading the storage state\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/FaucetContract.sol\":\"Faucet\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/FaucetContract.sol\":{\"keccak256\":\"0x1278141adb4d696d6e56784719243564aba612c1d37e9490cd1db71c56beba95\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://435d2a1f6e363f888415299e970cfe5c7a22c6c71f68585935965514746bb7ce\",\"dweb:/ipfs/Qmchm9gt9Ph2d1HjS4q5H9ZK1U6SNgHPqvtABzTkg8hSBD\"]},\"project:/contracts/IFaucet.sol\":{\"keccak256\":\"0x44e24d660ac201eb0c1586feb13fa1ee84b7d8415827b821fc8a1149884644ac\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://86415a5429ca69c037056e3aa0d236cd02765f54080d57e5c7bc52cb0cf79289\",\"dweb:/ipfs/QmYj7bVGZGccfCDTPyBdnfrnbnrTUNoLYut8Cf9cbJB3hG\"]},\"project:/contracts/Logger.sol\":{\"keccak256\":\"0x60000bced03abf08baa5cab15011749c4c40594993e6b2cefa68399ec1d7624f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6e844151d3fc14fe1ebfe32bacdf324f5a90731974b8839d9b71fa84f9f06e96\",\"dweb:/ipfs/QmfEwp7F44vUcbnMW2GVVfzVdLhjWbSN1a999aCQJ1cygg\"]},\"project:/contracts/Owned.sol\":{\"keccak256\":\"0x758975a14a668bb9e96fea2e80eae315453c3ab25e8492b778238c61d6e89b37\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a5642a886d774e111fb9e28b418819b395315f7da5ff756694566cbcb56e38f5\",\"dweb:/ipfs/Qmb4K3xAu64wyciET1D8NYcTkat63ebxP74UC1ctSue6ug\"]}},\"version\":1}",
@@ -10693,9 +10704,17 @@
     "name": "solc",
     "version": "0.8.11+commit.d7f03943.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x94095708C5b114CbC6054eF5198b06107e8ebB3B",
+      "transactionHash": "0x6b7830aaa692bdc78ddaa4e8d354a6d8d8152af2d38f67364807f6f044233503"
+    }
+  },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-08-28T05:35:47.708Z",
+  "updatedAt": "2022-08-28T13:24:13.670Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
