@@ -1,0 +1,325 @@
+{
+  "contractName": "IFaucet",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "addFunds",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "withdrawAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"addFunds\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"withdrawAmount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"- An interface cannot declare a constructor - An interface cannot have storage, so cannot declare state variables - All the declared functions of an interface should be `external` - Functions in interfaces cannot have modifiers - An interface cannot inherit from any smart contracts - An interface can only inherit from other interfaces\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IFaucet.sol\":\"IFaucet\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IFaucet.sol\":{\"keccak256\":\"0x44e24d660ac201eb0c1586feb13fa1ee84b7d8415827b821fc8a1149884644ac\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://86415a5429ca69c037056e3aa0d236cd02765f54080d57e5c7bc52cb0cf79289\",\"dweb:/ipfs/QmYj7bVGZGccfCDTPyBdnfrnbnrTUNoLYut8Cf9cbJB3hG\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.9.0;\n\n/**\n    - An interface cannot declare a constructor\n    - An interface cannot have storage, so cannot declare state variables\n    \n    - All the declared functions of an interface should be `external`\n    - Functions in interfaces cannot have modifiers\n\n    - An interface cannot inherit from any smart contracts\n    - An interface can only inherit from other interfaces\n */\n\ninterface IFaucet {\n  function addFunds() external payable;\n  function withdraw(uint withdrawAmount) external;\n}",
+  "sourcePath": "/Users/amitmahato/ReadyToWork/RND/Blockchain/faucet/contracts/IFaucet.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/IFaucet.sol",
+    "exportedSymbols": {
+      "IFaucet": [
+        245
+      ]
+    },
+    "id": 246,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 235,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IFaucet",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 236,
+          "nodeType": "StructuredDocumentation",
+          "src": "66:374:1",
+          "text": "- An interface cannot declare a constructor\n- An interface cannot have storage, so cannot declare state variables\n- All the declared functions of an interface should be `external`\n- Functions in interfaces cannot have modifiers\n- An interface cannot inherit from any smart contracts\n- An interface can only inherit from other interfaces"
+        },
+        "fullyImplemented": false,
+        "id": 245,
+        "linearizedBaseContracts": [
+          245
+        ],
+        "name": "IFaucet",
+        "nameLocation": "452:7:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "a26759cb",
+            "id": 239,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addFunds",
+            "nameLocation": "473:8:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 237,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "481:2:1"
+            },
+            "returnParameters": {
+              "id": 238,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "500:0:1"
+            },
+            "scope": 245,
+            "src": "464:37:1",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "2e1a7d4d",
+            "id": 244,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdraw",
+            "nameLocation": "513:8:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 242,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 241,
+                  "mutability": "mutable",
+                  "name": "withdrawAmount",
+                  "nameLocation": "527:14:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 244,
+                  "src": "522:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 240,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "522:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "521:21:1"
+            },
+            "returnParameters": {
+              "id": 243,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "551:0:1"
+            },
+            "scope": 245,
+            "src": "504:48:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 246,
+        "src": "442:112:1",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:522:1"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/IFaucet.sol",
+    "exportedSymbols": {
+      "IFaucet": [
+        245
+      ]
+    },
+    "id": 246,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 235,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IFaucet",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 236,
+          "nodeType": "StructuredDocumentation",
+          "src": "66:374:1",
+          "text": "- An interface cannot declare a constructor\n- An interface cannot have storage, so cannot declare state variables\n- All the declared functions of an interface should be `external`\n- Functions in interfaces cannot have modifiers\n- An interface cannot inherit from any smart contracts\n- An interface can only inherit from other interfaces"
+        },
+        "fullyImplemented": false,
+        "id": 245,
+        "linearizedBaseContracts": [
+          245
+        ],
+        "name": "IFaucet",
+        "nameLocation": "452:7:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "a26759cb",
+            "id": 239,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addFunds",
+            "nameLocation": "473:8:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 237,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "481:2:1"
+            },
+            "returnParameters": {
+              "id": 238,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "500:0:1"
+            },
+            "scope": 245,
+            "src": "464:37:1",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "2e1a7d4d",
+            "id": 244,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdraw",
+            "nameLocation": "513:8:1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 242,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 241,
+                  "mutability": "mutable",
+                  "name": "withdrawAmount",
+                  "nameLocation": "527:14:1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 244,
+                  "src": "522:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 240,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "522:4:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "521:21:1"
+            },
+            "returnParameters": {
+              "id": 243,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "551:0:1"
+            },
+            "scope": 245,
+            "src": "504:48:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 246,
+        "src": "442:112:1",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:522:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.11+commit.d7f03943.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-08-28T05:35:47.714Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "- An interface cannot declare a constructor - An interface cannot have storage, so cannot declare state variables - All the declared functions of an interface should be `external` - Functions in interfaces cannot have modifiers - An interface cannot inherit from any smart contracts - An interface can only inherit from other interfaces",
+    "version": 1
+  }
+}
