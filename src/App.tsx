@@ -62,10 +62,10 @@ function App() {
           providerLoaded: true,
         });
       } else {
-        setWeb3Api({
+        setWeb3Api((web3Api) => ({
           ...web3Api,
           providerLoaded: true,
-        });
+        }));
         console.error("Please, Install Metamask");
       }
     };
@@ -141,6 +141,7 @@ function App() {
                   <a
                     className="ml-2"
                     target="_blank"
+                    rel="noreferrer"
                     href="https://docs.metamask.io"
                   >
                     Install Metamask
