@@ -28,7 +28,16 @@ function App() {
 
   const accountListener = (provider: any) => {
     provider.on("accountsChanged", (_account: string) => {
+      // window.location.reload();
       setAccount(_account[0]);
+    });
+
+    // The _jsonRpcConnection is an experimental API and may change in future
+    provider._jsonRpcConnection.events.on("notification", (payload: any) => {
+      const { method } = payload;
+      if (method === "metamask_unlockStateChanged") {
+        setAccount(null);
+      }
     });
   };
 
@@ -127,10 +136,18 @@ function App() {
           <div className="balance-view is-size-2 mb-4">
             Current Balance: <strong>{balance}</strong> ETH
           </div>
-          <button className="button is-link mr-2" onClick={donateFund}>
+          <button
+            disabled={!account}
+            className="button is-link mr-2"
+            onClick={donateFund}
+          >
             Donate 1 ETH
           </button>
-          <button className="button is-primary mr-2" onClick={withdrawFund}>
+          <button
+            disabled={!account}
+            className="button is-primary mr-2"
+            onClick={withdrawFund}
+          >
             Withdraw 0.1 ETH
           </button>
         </div>
