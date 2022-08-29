@@ -51,8 +51,8 @@ function App() {
     const loadProvider = async () => {
       let provider: any = await detectEthereumProvider();
       accountListener(provider);
-      const contract = await loadContract("Faucet", provider);
       if (provider) {
+        const contract = await loadContract("Faucet", provider);
         setWeb3Api({
           provider,
           web3: new web3(provider),
@@ -127,6 +127,17 @@ function App() {
           <span>
             {account ? (
               account
+            ) : !web3Api.provider ? (
+              <div className="notification is-size-6 is-warning is-rounded">
+                Wallet is not detected!
+                <a
+                  className="ml-2"
+                  target="_blank"
+                  href="https://docs.metamask.io"
+                >
+                  Install Metamask
+                </a>
+              </div>
             ) : (
               <button className="button is-small" onClick={connectWallet}>
                 Connect Wallet
