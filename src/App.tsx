@@ -55,6 +55,7 @@ function App() {
       if (provider) {
         accountListener(provider);
         const contract = await loadContract("Faucet", provider);
+
         setWeb3Api({
           provider,
           web3: new web3(provider),
@@ -124,6 +125,8 @@ function App() {
     refresh();
   };
 
+  const isContractLoaded = account && web3Api.contract;
+
   return (
     <>
       <div className="faucet-wrapper">
@@ -159,15 +162,21 @@ function App() {
           <div className="balance-view is-size-2 my-4">
             Current Balance: <strong>{balance}</strong> ETH
           </div>
+          {!web3Api.contract && (
+            <div className="notification is-italic mb-2 is-warning">
+              You may be connected to the wrong network. Please, connect to{" "}
+              <strong>Ganache</strong>!
+            </div>
+          )}
           <button
-            disabled={!account}
+            disabled={!isContractLoaded}
             className="button is-link mr-2"
             onClick={donateFund}
           >
             Donate 1 ETH
           </button>
           <button
-            disabled={!account}
+            disabled={!isContractLoaded}
             className="button is-primary mr-2"
             onClick={withdrawFund}
           >
