@@ -34,6 +34,10 @@ function App() {
       setAccount(_account[0]);
     });
 
+    provider.on("chainChanged", () => {
+      window.location.reload();
+    });
+
     // The _jsonRpcConnection is an experimental API and may change in future
     provider._jsonRpcConnection.events.on("notification", (payload: any) => {
       const { method } = payload;
