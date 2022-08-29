@@ -14,10 +14,12 @@ function App() {
     provider: any;
     web3: web3 | null;
     contract: any;
+    providerLoaded: boolean;
   }>({
     provider: null,
     web3: null,
     contract: null,
+    providerLoaded: false,
   });
 
   const [account, setAccount] = useState<string | null>(null);
@@ -50,15 +52,20 @@ function App() {
      */
     const loadProvider = async () => {
       let provider: any = await detectEthereumProvider();
-      accountListener(provider);
       if (provider) {
+        accountListener(provider);
         const contract = await loadContract("Faucet", provider);
         setWeb3Api({
           provider,
           web3: new web3(provider),
           contract,
+          providerLoaded: true,
         });
       } else {
+        setWeb3Api({
+          ...web3Api,
+          providerLoaded: true,
+        });
         console.error("Please, Install Metamask");
       }
     };
@@ -125,26 +132,30 @@ function App() {
             <strong>Account: </strong>
           </span>
           <span>
-            {account ? (
-              account
-            ) : !web3Api.provider ? (
-              <div className="notification is-size-6 is-warning is-rounded">
-                Wallet is not detected!
-                <a
-                  className="ml-2"
-                  target="_blank"
-                  href="https://docs.metamask.io"
-                >
-                  Install Metamask
-                </a>
-              </div>
+            {web3Api.providerLoaded ? (
+              account ? (
+                account
+              ) : !web3Api.provider ? (
+                <span className="notification is-size-6 is-warning is-rounded">
+                  Wallet is not detected!
+                  <a
+                    className="ml-2"
+                    target="_blank"
+                    href="https://docs.metamask.io"
+                  >
+                    Install Metamask
+                  </a>
+                </span>
+              ) : (
+                <button className="button is-small" onClick={connectWallet}>
+                  Connect Wallet
+                </button>
+              )
             ) : (
-              <button className="button is-small" onClick={connectWallet}>
-                Connect Wallet
-              </button>
+              <span>Loading web3 provider...</span>
             )}
           </span>
-          <div className="balance-view is-size-2 mb-4">
+          <div className="balance-view is-size-2 my-4">
             Current Balance: <strong>{balance}</strong> ETH
           </div>
           <button
